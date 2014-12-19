@@ -92,8 +92,6 @@
     map)
   "Keymap for pixiv novel major mode.")
 
-(defvar pixiv-novel-mode-hook nil)
-
 (defun pixiv-novel/insert-newpage ()
   "Insert [newpage] tag."
   (interactive)
@@ -126,7 +124,7 @@
 
 (define-derived-mode pixiv-novel-mode fundamental-mode "pixivNovel"
   "Major mode for pixiv novel"
-  (set (make-local-variable 'font-lock-defaults) '(pixiv-novel-syntax-keywords)))
+  (setq font-lock-defaults '(pixiv-novel-syntax-keywords)))
 
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.pxv\\(\\.txt\\)?\\'" . pixiv-novel-mode))
