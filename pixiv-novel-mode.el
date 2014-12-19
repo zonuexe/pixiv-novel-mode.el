@@ -27,7 +27,53 @@
 
 ;;; Code:
 
+(defconst pixiv-novel-syntax-keywords
+  (list
+   '("\\[newpage\\]" . font-lock-keyword-face)
+   (cons
+    (concat
+     "\\(\\[\\)"
+     "\\(chapter:\\)"
+     "\\([^\]]+\\)"
+     "\\(\\]\\)")
+    '((1 font-lock-keyword-face)
+      (2 font-lock-builtin-face)
+      (3 font-lock-function-name-face)
+      (4 font-lock-keyword-face)))
+   (cons
+    (concat
+     "\\(\\[\\[\\)"
+     "\\(\\jumpuri:\\)"
+     "\\([^>]+\\)"
+     "\\( > \\)"
+     "\\(https?://[^\]]+\\)"
+     "\\(\\]\\]\\)")
+    '((1 font-lock-keyword-face)
+      (2 font-lock-builtin-face)
+      (3 font-lock-function-name-face)
+      (4 font-lock-keyword-face)
+      (5 font-lock-string-face)
+      (6 font-lock-keyword-face)))
+   (cons
+    (concat
+     "\\(\\[jump:\\)"
+     "\\([1-9][0-9]*\\)"
+     "\\(\\]\\)")
+    '((1 font-lock-keyword-face)
+      (2 font-lock-function-name-face)
+      (3 font-lock-keyword-face)))
+   (cons
+    (concat
+     "\\(\\[\\pixivimage:\\)"
+     "\\([1-9][0-9]*\\)"
+     "\\(\\]\\)")
+    '((1 font-lock-keyword-face)
+      (2 font-lock-function-name-face)
+      (3 font-lock-keyword-face)))))
 
+(define-derived-mode pixiv-novel-mode fundamental-mode "pixivNovel"
+  "Major mode for pixiv novel"
+  (set (make-local-variable 'font-lock-defaults) '(pixiv-novel-syntax-keywords)))
 
 (provide 'pixiv-novel-mode)
 ;;; pixiv-novel-mode.el ends here
