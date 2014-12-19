@@ -29,7 +29,14 @@
 
 (defconst pixiv-novel-syntax-keywords
   (list
-   '("\\[newpage\\]" . font-lock-keyword-face)
+   (cons
+    (concat
+     "\\(\\[\\)"
+     "\\(newpage\\)"
+     "\\(\\]\\)")
+    '((1 font-lock-keyword-face)
+      (2 font-lock-builtin-face)
+      (3 font-lock-keyword-face)))
    (cons
     (concat
      "\\(\\[\\)"
@@ -56,20 +63,26 @@
       (6 font-lock-keyword-face)))
    (cons
     (concat
-     "\\(\\[jump:\\)"
+     "\\(\\[\\)"
+     "\\(jump:\\)"
      "\\([1-9][0-9]*\\)"
      "\\(\\]\\)")
     '((1 font-lock-keyword-face)
-      (2 font-lock-function-name-face)
-      (3 font-lock-keyword-face)))
+      (2 font-lock-builtin-face)
+      (3 font-lock-function-name-face)
+      (4 font-lock-keyword-face)))
    (cons
     (concat
-     "\\(\\[\\pixivimage:\\)"
+     "\\(\\[\\)"
+     "\\(pixivimage:\\)"
      "\\([1-9][0-9]*\\)"
      "\\(\\]\\)")
     '((1 font-lock-keyword-face)
-      (2 font-lock-function-name-face)
-      (3 font-lock-keyword-face)))))
+      (2 font-lock-builtin-face)
+      (3 font-lock-function-name-face)
+      (4 font-lock-keyword-face)))))
+
+(defvar pixiv-novel-mode-hook nil)
 
 (define-derived-mode pixiv-novel-mode fundamental-mode "pixivNovel"
   "Major mode for pixiv novel"
