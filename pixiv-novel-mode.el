@@ -128,5 +128,8 @@
   "Major mode for pixiv novel"
   (set (make-local-variable 'font-lock-defaults) '(pixiv-novel-syntax-keywords)))
 
+;;;###autoload
+(add-to-list 'auto-mode-alist '("\\.pxv\\(\\.txt\\)?\\'" . pixiv-novel-mode))
+
 (provide 'pixiv-novel-mode)
 ;;; pixiv-novel-mode.el ends here
