@@ -82,7 +82,47 @@
       (3 font-lock-function-name-face)
       (4 font-lock-keyword-face)))))
 
+(defvar pixiv-novel-mode-map
+  (let ((map (make-keymap)))
+    (define-key map (kbd "C-c C-i n") 'pixiv-novel/insert-newpage)
+    (define-key map (kbd "C-c C-i c") 'pixiv-novel/insert-chapter)
+    (define-key map (kbd "C-c C-i i") 'pixiv-novel/insert-illustration)
+    (define-key map (kbd "C-c C-i p") 'pixiv-novel/insert-jump-page)
+    (define-key map (kbd "C-c C-i u") 'pixiv-novel/insert-jump-url)
+    map)
+  "Keymap for pixiv novel major mode.")
+
 (defvar pixiv-novel-mode-hook nil)
+
+(defun pixiv-novel/insert-newpage ()
+  "Insert [newpage] tag."
+  (interactive)
+  (insert "[newpage]\n"))
+
+(defun pixiv-novel/insert-jump-page (page)
+  "Insert [jump] tag that move to `PAGE'."
+  (interactive "nPage:")
+  (insert (concat "[jump:" (number-to-string page) "]\n")))
+
+(defun pixiv-novel/insert-jump-url (url)
+  "Insert [[jumpurl]] tag that referes `URL'."
+  (interactive "sURL:")
+  (insert (concat "[jump:" url "]\n")))
+
+(defun pixiv-novel/insert-chapter (title)
+  "Insert [chapter] tag that named `TITLE'."
+  (interactive "sTitle:")
+  (insert (concat "[chapter:" title "]\n")))
+
+(defun pixiv-novel/insert-illustration (id-or-url)
+  "Insert [pixivimage] tag that insert illustration by `ID-OR-URL'."
+  (interactive "spixiv Illustration ID or URL:")
+  (insert (concat "[pixivimage:" (pixiv-novel/parse-pixiv-illustration-id id-or-url) "]\n")))
+
+(defun pixiv-novel/parse-pixiv-illustration-id (input)
+  "Parse pixiv URL by `INPUT'."
+  (string-match "\\([1-9][0-9]*\\)" input)
+  (match-string 0 input))
 
 (define-derived-mode pixiv-novel-mode fundamental-mode "pixivNovel"
   "Major mode for pixiv novel"
