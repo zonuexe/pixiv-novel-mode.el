@@ -31,6 +31,20 @@
   (list
    (cons
     (concat
+     "\\(\\[\\[\\)"
+     "\\(\\rb:\\)"
+     "\\([^>]+\\)"
+     "\\( > \\)"
+     "\\([^>]+\\)"
+     "\\(\\]\\]\\)")
+    '((1 font-lock-keyword-face)
+      (2 font-lock-builtin-face)
+      (3 font-lock-function-name-face)
+      (4 font-lock-keyword-face)
+      (5 font-lock-string-face)
+      (6 font-lock-keyword-face)))
+   (cons
+    (concat
      "\\(\\[\\)"
      "\\(newpage\\)"
      "\\(\\]\\)")
