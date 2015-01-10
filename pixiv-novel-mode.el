@@ -4,7 +4,7 @@
 
 ;; Author: USAMI Kenta <tadsan@zonu.me>
 ;; Created: 19 Dec 2014
-;; Version: 0.0.1
+;; Version: 0.0.3
 ;; Keywords: novel pixiv
 
 ;; This file is NOT part of GNU Emacs.
