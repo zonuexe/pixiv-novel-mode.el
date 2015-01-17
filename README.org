@@ -16,7 +16,7 @@
    #+END_SRC
 
 ** Copyright
-   : http-agent.el --- Major mode for pixiv novel
+   : pixiv-novel-mode.el --- Major mode for pixiv novel
    : Copyright (C) 2014 pixiv
    : 
    : This program is free software; you can redistribute it and/or modify
