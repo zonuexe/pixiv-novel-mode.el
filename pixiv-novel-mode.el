@@ -138,7 +138,7 @@
   (match-string 0 input))
 
 ;;;###autoload
-(define-derived-mode pixiv-novel-mode fundamental-mode "pixivNovel"
+(define-derived-mode pixiv-novel-mode text-mode "pixivNovel"
   "Major mode for pixiv novel"
   (setq font-lock-defaults '(pixiv-novel-syntax-keywords)))
 
